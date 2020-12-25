@@ -29,6 +29,7 @@ body {
 
 .section-3 {
   flex-grow: 5;
+  transition: background-color 0.3s ease;
 }
 
 .section-2 > .pill-outer {

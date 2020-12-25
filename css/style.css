@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap");
+:root {
+  --background-alarm-1: #F87070;
+  --background-alarm-2: #70F3F8;
+  --background-alarm-3: #D881F8;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -34,6 +40,7 @@ body {
 
 .section-3 {
   flex-grow: 5;
+  transition: background-color 0.3s ease;
 }
 
 .section-2 > .pill-outer {

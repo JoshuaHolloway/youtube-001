@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: #D7E0FF;
+}
+
+body {
+  background: #1E2140;
+  border: dashed 5px hotpink;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  height: 400px;
+  width: 90%;
+  border: solid 5px yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.section-1, .section-2, .section-3 {
+  flex-grow: 1;
+  border: dashed 1px deepskyblue;
+  display: grid;
+  place-items: center;
+}
+
+.section-3 {
+  flex-grow: 5;
+}
+
+.section-2 > .pill-outer {
+  height: 100%;
+  width: 100%;
+  background: #161932;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+.pill-outer > .pills-inner {
+  height: 100%;
+  width: 30%;
+  border: dotted darkorchid 2px;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+}
+
+.selected-pill {
+  background: #D881F8;
+}
+
+.section-3 > .circle {
+  height: 170px;
+  width: 170px;
+  background: #161932;
+  border: solid 8px white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}

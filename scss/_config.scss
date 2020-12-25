@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap');
+  
+$background-primary: #1E2140;
+$background-secondary: #161932;
+$text-primary: #D7E0FF;
+$text-secondary: #161932;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: $text-primary;
+}

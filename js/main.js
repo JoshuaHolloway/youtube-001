@@ -12,6 +12,7 @@ for (let i = 1; i <= 3; ++i) {
 }
 // console.log('alarm_colors: ', alarm_colors);
 
+let interval_id = null;
 circle_elem.addEventListener('click', () => {
 
   console.dir(circle_elem);
@@ -23,7 +24,8 @@ circle_elem.addEventListener('click', () => {
   // Does exucution pause here?
   console.log('AFTER SetTimeOut()');
  
-  setInterval(f, 1000);
+  // Only run when timer >= 0
+  interval_id = setInterval(f, 1000);
 });
 
 
@@ -45,9 +47,12 @@ const f = () => {
         
       count++;
     }, 1000);
-  } if (time < 0) {
+  } if (time <= 0) {
     min_elem.textContent = '00';
     sec_elem.textContent = '00';
+
+    // Stop decrementing the timer
+    clearInterval(interval_id);
   } else {
     min_elem.textContent = String(min).padStart(2, '0');
     sec_elem.textContent = String(sec).padStart(2, '0');

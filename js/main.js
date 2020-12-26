@@ -16,7 +16,22 @@ const circle_elem = document.querySelector('.circle');
 const section3_elem = document.querySelector('.section-3');
 const pills_inner = document.querySelectorAll('.pills-inner');
 const input_fields = document.querySelectorAll('.input-fields');
-console.log('input_fields: ', input_fields);
+
+console.dir(input_fields[0]);
+
+
+input_fields.forEach(elem => {
+ 
+  elem.value = 0;
+  elem.addEventListener('input', () => {
+   const total_secs = convert_to_secs(
+     input_fields[0].value, 
+     input_fields[1].value
+    );
+
+    console.log('total-secs: ', total_secs);
+  })
+});
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 

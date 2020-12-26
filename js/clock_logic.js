@@ -2,7 +2,7 @@
 const input_min = 10;
 const input_sec = 59;
 
-const convert_to_secs = (input_min, input_sec) => input_min * 60 + input_sec;
+const convert_to_secs = (input_min, input_sec) => Number(input_min) * 60 + Number(input_sec);
 
 const convert_from_secs = (input_sec) => {
   const sec = input_sec % 60;

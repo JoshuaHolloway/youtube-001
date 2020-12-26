@@ -1,3 +1,10 @@
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// Globals:
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+let countdown_interval_id = null;
+let flashing_interval_id = null;
+
 // TODO: Change this to the value entered from user
 const INITIAL_TIME = 2;
 
@@ -8,9 +15,69 @@ const sec_elem = document.querySelector('#sec');
 const circle_elem = document.querySelector('.circle');
 const section3_elem = document.querySelector('.section-3');
 const pills_inner = document.querySelectorAll('.pills-inner');
+const input_fields = document.querySelectorAll('.input-fields');
+console.log('input_fields: ', input_fields);
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+// Grab global colors:
+let alarm_colors = [];
+for (let i = 1; i <= 3; ++i) {
+
+  const alarm_color = getComputedStyle(document.documentElement)
+    .getPropertyValue(`--background-alarm-${i}`);
+  alarm_colors.push(alarm_color);
+}
+
+// Run / Set toggle class 'selected-pill'
+pills_inner[0].addEventListener('click',  () => {
+
+  // Toggle class 'selected-pill'
+  pills_inner[0].classList.add('selected-pill');
+  pills_inner[1].classList.remove('selected-pill');
+
+  // .section-3 .input_fields{
+  //   display: none;
+  // }
+  input_fields.forEach((elem, idx, arr) => {
+    elem.style.display = 'none';
+  });
+
+
+}); // run 
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+pills_inner[1].addEventListener('click',  () => {
+
+  // Toggle class 'selected-pill'
+  pills_inner[0].classList.remove('selected-pill');
+  pills_inner[1].classList.add('selected-pill');
+
+
+  // .section-3 .input_fields{
+  //   display: inline-block;
+  // }
+  input_fields.forEach((elem, idx, arr) => {
+
+    console.log('elem: ', elem);
+
+    elem.style.display = 'inline-block';
+  });
+
+}); // set
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+// Reset Button Logic
 pills_inner[2].addEventListener('click', () => {
   console.log('reset pill clicked');
+
+  // Flash the button
+  pills_inner[2].style.backgroundColor = alarm_colors[2];
+  setTimeout(() => {
+    pills_inner[2].style.backgroundColor = '#161932';
+  }, 300);
 
   // Reset time (for countdown logic)
   time = INITIAL_TIME;
@@ -25,22 +92,15 @@ pills_inner[2].addEventListener('click', () => {
   section3_elem.style.backgroundColor = '#161932';
 });
 
-let alarm_colors = [];
-for (let i = 1; i <= 3; ++i) {
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-  const alarm_color = getComputedStyle(document.documentElement)
-    .getPropertyValue(`--background-alarm-${i}`);
-  alarm_colors.push(alarm_color);
-}
-// console.log('alarm_colors: ', alarm_colors);
-
-let countdown_interval_id = null;
-let flashing_interval_id = null;
+// Start timer
 circle_elem.addEventListener('click', () => {
 
   console.dir(circle_elem);
   
-  circle_elem.style.backgroundColor = 'red';
+  // Flash the timer start button
+  circle_elem.style.backgroundColor = alarm_colors[2];
   setTimeout(() => {
     circle_elem.style.backgroundColor = '#161932';
   }, 300);
@@ -48,13 +108,13 @@ circle_elem.addEventListener('click', () => {
   console.log('AFTER SetTimeOut()');
  
   // Only run when timer >= 0
-  countdown_interval_id = setInterval(f, 1000);
+  countdown_logic_f();
+  countdown_interval_id = setInterval(countdown_logic_f, 1000);
 });
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-
-
-const f = () => {
+const countdown_logic_f = () => {
   console.log(time);
 
   const [min, sec] = convert_from_secs(time);

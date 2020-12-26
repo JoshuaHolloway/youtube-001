@@ -60,6 +60,7 @@ body {
   display: grid;
   place-items: center;
   border-radius: inherit;
+  transition: background-color 0.3s ease;
 }
 
 .selected-pill {
@@ -77,8 +78,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.section-3 > .input_field_container {
-  border: solid red 1px;
+.section-3 > .input-field-container {
   height: 50px;
   width: 50%;
   display: flex;
@@ -86,7 +86,8 @@ body {
   align-items: center;
 }
 
-.section-3 .input_fields {
+.section-3 .input-fields {
+  display: none;
   width: 20%;
   height: 25px;
 }

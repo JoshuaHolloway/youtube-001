@@ -5,10 +5,6 @@
 let countdown_interval_id = null;
 let flashing_interval_id = null;
 
-// TODO: Change this to the value entered from user
-const INITIAL_TIME = 2;
-
-let time = INITIAL_TIME;
 
 const min_elem = document.querySelector('#min');
 const sec_elem = document.querySelector('#sec');
@@ -20,19 +16,30 @@ const input_fields = document.querySelectorAll('.input-fields');
 console.dir(input_fields[0]);
 
 
+// TODO: Change this to the value entered from user
+
+let time = 0;
 input_fields.forEach(elem => {
- 
+  
   elem.value = 0;
   elem.addEventListener('input', () => {
-   const total_secs = convert_to_secs(
-     input_fields[0].value, 
-     input_fields[1].value
+    const total_secs = convert_to_secs(
+      input_fields[0].value, 
+      input_fields[1].value
     );
-
+      
     console.log('total-secs: ', total_secs);
+
+    time = total_secs;
+    const [min, sec] = convert_from_secs(total_secs);
+
+    // Reset display
+    min_elem.textContent = String(min).padStart(2, '0');
+    sec_elem.textContent = String(sec).padStart(2, '0');
+
   })
 });
-
+  
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 // Grab global colors:
@@ -95,7 +102,6 @@ pills_inner[2].addEventListener('click', () => {
   }, 300);
 
   // Reset time (for countdown logic)
-  time = INITIAL_TIME;
   const [min, sec] = convert_from_secs(time);
   
   // Reset display
@@ -159,3 +165,4 @@ const countdown_logic_f = () => {
   time--;
 };
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -19,10 +19,14 @@
   </svg>
 
   <div class="slidecontainer">
-    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    <input type="range" min="0" max="360" value="90" class="slider" id="myRange">
+    <p class="slider-val"></p>
   </div>
 
   <script>
+    const deg2rad = (deg) => deg * (Math.PI / 180);
+    const rad2deg = (rad) => rad * (180 / Math.PI);
+
     let svg = document.querySelector('svg');
     var W = svg.getClientRects();
     var H = svg.getClientRects().height;
@@ -39,29 +43,31 @@
     console.log(path);
 
     let theta = 0;
-    const f = () => {
+    const f = (event) => {
+
+      console.log(event.target.value);
+      const slider_val = event.target.value;
+      const slider_val_text = document.querySelector('.slider-val');
+      slider_val_text.textContent = slider_val;
 
       const r = 100;
       const x = r + r * cos(theta);
       const y = r + r * sin(theta);
 
-
-      // path.setAttribute('d', `M 100 0 A 100 100 0 0 1 ${x} ${y}`);
-
-      if (theta <= 180) {
+      if (theta <= deg2rad(180)) {
         path.setAttribute('d', `M 200 100 A 100 100 0 0 1 ${x} ${y}`);  
-      } else {
+      } 
+      else {
         path.setAttribute('d', `M 200 100 A 100 100 0 1 1 ${x} ${y}`);
       }
 
-      window.requestAnimationFrame(f);
-
-      theta += 0.01;
-      if (theta > 90)
-        theta = 0;
-      console.log(`theta: ${theta}, (x,y): (${x}, ${y})`);
+      theta = deg2rad(slider_val);
+      console.log(`theta: ${theta}`);
     };
     // f();
+
+    const slider = document.querySelector('input');
+    slider.addEventListener('input', f);
 
   </script>
 </body>

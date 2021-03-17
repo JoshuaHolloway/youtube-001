@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dev | arc</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <svg>
+    <path d="
+      M 100 0 
+      A 100 100 0 0 1 71 71" 
+      fill="none" 
+      stroke="black" 
+      stroke-width="10" 
+      style="stroke-linecap: round"/>
+  </svg>
+
+  <div class="slidecontainer">
+    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  </div>
+
+  <script>
+    let svg = document.querySelector('svg');
+    var W = svg.getClientRects();
+    var H = svg.getClientRects().height;
+    console.dir('svg');
+    // console.log(`(W, H): (${W}, ${H})`);
+    console.log(W);
+
+    const [x0, y0] = [100, 100];
+
+    const PI = Math.PI;
+    const cos = Math.cos;
+    const sin = Math.sin;
+    const path = document.querySelector('path');
+    console.log(path);
+
+    let theta = 0;
+    const f = () => {
+
+      const r = 100;
+      const x = r + r * cos(theta);
+      const y = r + r * sin(theta);
+
+
+      // path.setAttribute('d', `M 100 0 A 100 100 0 0 1 ${x} ${y}`);
+
+      if (theta <= 180) {
+        path.setAttribute('d', `M 200 100 A 100 100 0 0 1 ${x} ${y}`);  
+      } else {
+        path.setAttribute('d', `M 200 100 A 100 100 0 1 1 ${x} ${y}`);
+      }
+
+      window.requestAnimationFrame(f);
+
+      theta += 0.01;
+      if (theta > 90)
+        theta = 0;
+      console.log(`theta: ${theta}, (x,y): (${x}, ${y})`);
+    };
+    // f();
+
+  </script>
+</body>
+</html>
